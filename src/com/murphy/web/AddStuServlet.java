@@ -19,7 +19,7 @@ import java.io.PrintWriter;
 public class AddStuServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        req.setCharacterEncoding("UTF-8");
+
         String stuNo = req.getParameter("stuNo");
         String stuName = req.getParameter("stuName");
         String gid = req.getParameter("gid");
