@@ -60,7 +60,7 @@
 					<th>操作</th>
 				</tr>
 
-				<c:forEach items="${stuList}" var="stu">
+				<c:forEach items="${p1.dataList}" var="stu">
 					<tr id="product1">
 						<td align="center">${stu.stuNo}</td>
 						<td align="center">${stu.stuName}</td>
@@ -80,14 +80,14 @@
 						<a style="text-decoration: none;"
 						   href="/Educational/student/studentServlet?stuname=${stuname}&stuno=${stuno}&sex=${sex}">首页</a>
 						<a style="text-decoration: none;"
-						   href="/Educational/student/studentServlet?pageIndex=${index-1<=1?1:index-1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">上一页</a>
+						   href="/Educational/student/studentServlet?pageIndex=${p1.pageIndex-1<=1?1:p1.pageIndex-1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">上一页</a>
 						<a style="text-decoration: none;"
-						   href="/Educational/student/studentServlet?pageIndex=${index+1>=totalPages?totalPages:index+1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">下一页</a>
+						   href="/Educational/student/studentServlet?pageIndex=${p1.pageIndex+1>=p1.totalPages?p1.totalPages:p1.pageIndex+1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">下一页</a>
 						<a style="text-decoration: none;"
-						   href="/Educational/student/studentServlet?pageIndex=${totalPages}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">尾页</a>
-						共${total}条
-						每页显示${size}条
-						${index}/${totalPages}
+						   href="/Educational/student/studentServlet?pageIndex=${p1.totalPages}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">尾页</a>
+						共${p1.total}条
+						每页显示${p1.pageSize}条
+						${p1.pageIndex}/${p1.totalPages}
 					</td>
 				</tr>
 				</tbody>

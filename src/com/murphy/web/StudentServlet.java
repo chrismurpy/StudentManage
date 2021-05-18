@@ -6,6 +6,7 @@ import com.murphy.service.GradeService;
 import com.murphy.service.StudentService;
 import com.murphy.service.impl.GradeServiceImpl;
 import com.murphy.service.impl.StudentServiceImpl;
+import com.murphy.util.PageUtil;
 
 import javax.servlet.ServletException;
 import javax.servlet.annotation.WebServlet;
@@ -133,7 +134,6 @@ public class StudentServlet extends HttpServlet {
      * @throws IOException
      */
     protected void findList(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-        final int PAGE_SIZE = 5;
         // 1. 获取参数
         // 1.1 模糊查询条件
         String stuName = req.getParameter("stuName");
@@ -147,17 +147,19 @@ public class StudentServlet extends HttpServlet {
         int uSex = (sex==null||sex.length()==0?-1:Integer.parseInt(sex));
 
         // 2. 调取Service方法
+        PageUtil pageUtil = new PageUtil();
         StudentService service = new StudentServiceImpl();
-        List<Student> students = service.getStudents(stuName,stuNo,uSex,index,PAGE_SIZE);
+        List<Student> students = service.getStudents(stuName,stuNo,uSex,index,pageUtil.getPageSize());
         // 获取总页数 = 总条数 % 每页显示的条数 > 0 ? 总条数 / 每页显示条数 + 1 : 总条数 / 每页显示条数
         // 总条数
         int total = service.total(stuName, stuNo, uSex);
+        pageUtil.setTotal(total);
         // 总页数
-        int totalPages = total%PAGE_SIZE>0?(total/PAGE_SIZE+1):(total/PAGE_SIZE);
 
         // 3. 跳转页面
         // 若后台想给前台传数据，需要在后台存值
-        req.setAttribute("stuList",students);
+        pageUtil.setDataList(students);
+        pageUtil.setPageIndex(index);
 
         // 存储模糊查询条件
         req.setAttribute("stuname",stuName);
@@ -165,11 +167,7 @@ public class StudentServlet extends HttpServlet {
         req.setAttribute("sex",sex);
 
         // 存储分页数据
-        req.setAttribute("index",index);
-        req.setAttribute("size",PAGE_SIZE);
-        req.setAttribute("total",total);
-        req.setAttribute("totalPages",totalPages);
-
+        req.setAttribute("p1",pageUtil);
 
         req.getRequestDispatcher("list.jsp").forward(req,resp);
     }
