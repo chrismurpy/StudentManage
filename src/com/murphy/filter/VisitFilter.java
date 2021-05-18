@@ -11,7 +11,7 @@ import java.io.IOException;
 public class VisitFilter implements Filter {
     @Override
     public void init(FilterConfig filterConfig) throws ServletException {
-
+        System.out.println("-----INIT-----");
     }
 
     @Override
@@ -28,6 +28,6 @@ public class VisitFilter implements Filter {
 
     @Override
     public void destroy() {
-
+        System.out.println("-----DESTROY-----");
     }
 }
