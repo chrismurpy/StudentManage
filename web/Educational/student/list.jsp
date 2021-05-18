@@ -35,7 +35,7 @@
 
 	<div class="cztable">
 		<div>
-			<form action="/Educational/student/getStudentList" method="get">
+			<form action="/Educational/student/studentServlet" method="get">
 				学生名称:
 				<input type="text" name="stuName" value="${stuname}"/>
 				学生学号:
@@ -69,8 +69,8 @@
 						<td align="center">${stu.profession}</td>
 						<td align="center">${stu.regDate}</td>
 						<td align="center">
-							<a href="/Educational/student/findById?sid=${stu.stuId}">修改</a>
-							<a href="/Educational/student/deleteById?sid=${stu.stuId}">删除</a>
+							<a href="/Educational/student/studentServlet?method=findById&sid=${stu.stuId}">修改</a>
+							<a href="/Educational/student/studentServlet?method=delete&sid=${stu.stuId}">删除</a>
 						</td>
 					</tr>
 				</c:forEach>
@@ -78,13 +78,13 @@
 				<tr>
 					<td colspan="20" style="text-align: center;">
 						<a style="text-decoration: none;"
-						   href="/Educational/student/getStudentList?stuname=${stuname}&stuno=${stuno}&sex=${sex}">首页</a>
+						   href="/Educational/student/studentServlet?stuname=${stuname}&stuno=${stuno}&sex=${sex}">首页</a>
 						<a style="text-decoration: none;"
-						   href="/Educational/student/getStudentList?pageIndex=${index-1<=1?1:index-1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">上一页</a>
+						   href="/Educational/student/studentServlet?pageIndex=${index-1<=1?1:index-1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">上一页</a>
 						<a style="text-decoration: none;"
-						   href="/Educational/student/getStudentList?pageIndex=${index+1>=totalPages?totalPages:index+1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">下一页</a>
+						   href="/Educational/student/studentServlet?pageIndex=${index+1>=totalPages?totalPages:index+1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">下一页</a>
 						<a style="text-decoration: none;"
-						   href="/Educational/student/getStudentList?pageIndex=${totalPages}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">尾页</a>
+						   href="/Educational/student/studentServlet?pageIndex=${totalPages}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">尾页</a>
 						共${total}条
 						每页显示${size}条
 						${index}/${totalPages}

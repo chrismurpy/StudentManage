@@ -27,7 +27,7 @@
         </div>
 </div>
 <div class="cztable">
-    <form action="/Educational/student/addStu" method="post">
+    <form action="/Educational/student/studentServlet?method=insert" method="post">
 	<table border="1" width="100%" class="table_a">
                 <tr  width="120px;">
                     <td width="10%">学号：<span style="color:red">*</span>：</td>
