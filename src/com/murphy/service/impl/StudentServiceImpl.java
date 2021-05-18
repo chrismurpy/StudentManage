@@ -23,4 +23,9 @@ public class StudentServiceImpl implements StudentService {
     public int total(String name, String stuNo, int sex) {
         return studentDao.total(name, stuNo, sex);
     }
+
+    @Override
+    public int insertStu(Student student) {
+        return studentDao.insertStu(student);
+    }
 }

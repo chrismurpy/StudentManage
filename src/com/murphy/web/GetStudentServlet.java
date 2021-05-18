@@ -30,13 +30,14 @@ public class GetStudentServlet extends HttpServlet {
         String pageIndex = req.getParameter("pageIndex");
         // 如果页面没有传入pageIndex的值,则认为默认查询第一页
         int index = pageIndex == null?1:Integer.parseInt(pageIndex);
+        int uSex = (sex==null||sex.length()==0?-1:Integer.parseInt(sex));
 
         // 2. 调取Service方法
         StudentService service = new StudentServiceImpl();
-        List<Student> students = service.getStudents(stuName,stuNo,sex==null?-1:Integer.parseInt(sex),index,PAGE_SIZE);
+        List<Student> students = service.getStudents(stuName,stuNo,uSex,index,PAGE_SIZE);
         // 获取总页数 = 总条数 % 每页显示的条数 > 0 ? 总条数 / 每页显示条数 + 1 : 总条数 / 每页显示条数
         // 总条数
-        int total = service.total(stuName, stuNo, sex==null?-1:Integer.parseInt(sex));
+        int total = service.total(stuName, stuNo, uSex);
         // 总页数
         int totalPages = total%PAGE_SIZE>0?(total/PAGE_SIZE+1):(total/PAGE_SIZE);
 

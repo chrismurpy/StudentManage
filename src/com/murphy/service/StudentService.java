@@ -27,4 +27,11 @@ public interface StudentService {
      * @param sex
      */
     public int total(String name,String stuNo,int sex);
+
+    /**
+     * 新增学生
+     * @param student
+     * @return
+     */
+    public int insertStu(Student student);
 }

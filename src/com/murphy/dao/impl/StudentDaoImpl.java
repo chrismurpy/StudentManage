@@ -7,6 +7,7 @@ import com.murphy.dao.StudentDao;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
+import java.util.Date;
 import java.util.List;
 
 /**
@@ -88,5 +89,35 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
             closeAll();
         }
         return total;
+    }
+
+    @Override
+    public int insertStu(Student student) {
+        int i = 0;
+        try {
+            String sql = "insert into student values(null,?,?,?,?,?,?,?,?,?,?,?,?,?,?)";
+            List params = new ArrayList();
+            params.add(student.getStuName());
+            params.add(student.getStuNo());
+            params.add(student.getSex());
+            params.add(student.getPhone());
+            params.add(student.getEmail());
+            params.add(student.getRegistered());
+            params.add(student.getAddress());
+            params.add(student.getProfession());
+            params.add(student.getIdNumber());
+            params.add(student.getPolitics());
+            params.add(new Date());
+            // 1 表示 在读
+            params.add(1);
+            params.add(student.getIntroduction());
+            params.add(student.getGid());
+            i = update(sql,params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return i;
     }
 }
