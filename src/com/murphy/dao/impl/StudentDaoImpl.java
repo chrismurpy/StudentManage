@@ -20,7 +20,7 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
         List list = new ArrayList<Student>();
         List params = new ArrayList();
         try {
-            StringBuffer sqlBuff = new StringBuffer(" select * from student where 1=1 ");
+            StringBuffer sqlBuff = new StringBuffer(" select * from student where 1=1 and state!=4 ");
             if (name!=null && name.length()>0){
                 sqlBuff.append(" and stuname like ? ");
                 params.add("%"+name+"%");
@@ -65,7 +65,7 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
         int total = 0;
         List params = new ArrayList();
         try {
-            StringBuffer sqlBuff = new StringBuffer(" select count(*) from student where 1=1 ");
+            StringBuffer sqlBuff = new StringBuffer(" select count(*) from student where 1=1 and state!=4 ");
             if (name != null && name.length() > 0) {
                 sqlBuff.append(" and stuname like ? ");
                 params.add("%" + name + "%");
@@ -107,7 +107,7 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
             params.add(student.getIdNumber());
             params.add(student.getPolitics());
             params.add(new Date());
-            // 1 表示 在读
+            // 1 - 在读 / 2 - 休学 / 3 - 退学 / 4 - 删除
             params.add(1);
             params.add(student.getIntroduction());
             params.add(student.getGid());
@@ -171,6 +171,23 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
             params.add(student.getAddress());
             params.add(student.getIntroduction());
             params.add(student.getStuId());
+            update = update(sql, params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return update;
+    }
+
+    @Override
+    public int deleteStu(String sid) {
+        int update = 0;
+        try {
+            String sql = "update student set state=? where stuid=?";
+            List params = new ArrayList();
+            params.add(4);
+            params.add(sid);
             update = update(sql, params);
         } catch (Exception e) {
             e.printStackTrace();

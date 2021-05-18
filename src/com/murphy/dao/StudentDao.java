@@ -43,4 +43,11 @@ public interface StudentDao {
      * @return
      */
     public int updateStu(Student student);
+
+    /**
+     * 假删除学生
+     * @param sid
+     * @return
+     */
+    public int deleteStu(String sid);
 }

@@ -38,4 +38,9 @@ public class StudentServiceImpl implements StudentService {
     public int updateStu(Student student) {
         return studentDao.updateStu(student);
     }
+
+    @Override
+    public int deleteStu(String sid) {
+        return studentDao.deleteStu(sid);
+    }
 }
