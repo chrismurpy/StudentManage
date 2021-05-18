@@ -15,20 +15,22 @@ import java.util.List;
 /**
  * @author murphy
  */
-@WebServlet("/Educational/student/getStudentList")
+@WebServlet(urlPatterns = "/Educational/student/getStudentList")
 public class GetStudentServlet extends HttpServlet {
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         // 1. 获取参数
         String stuName = req.getParameter("stuName");
-        System.out.println("1" + stuName);
         String stuNo = req.getParameter("stuNo");
-        System.out.println("2" + stuNo);
         String sex = req.getParameter("sex");
-        System.out.println("3" + sex);
         // 2. 调取Service方法
         StudentService service = new StudentServiceImpl();
-        List<Student> students = service.getStudents(stuName,stuNo,Integer.parseInt(sex));
+        int sex1=-1;
+        if(sex!=null){
+            sex1=Integer.parseInt(sex);
+        }
+        List<Student> students = service.getStudents(stuName,stuNo, sex1);
+        System.out.println(students);
         // 3. 跳转页面
         // 若后台想给前台传数据，需要在后台存值
         req.setAttribute("stuList",students);

@@ -53,7 +53,7 @@
             <input type="submit" value="查询" />
         </form>
 
-        <table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <table width="100%" border="1" cellspacing="0" cellpadding="0">
             <tbody>
             <tr style="height: 25px" align="center">
                 <th >学号</th>
