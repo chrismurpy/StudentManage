@@ -16,7 +16,7 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
 
 
     @Override
-    public List<Student> getStudents(String name,String stuNo,int sex) {
+    public List<Student> getStudents(String name,String stuNo,int sex,int pageIndex,int pageSize) {
         List list = new ArrayList<Student>();
         List params = new ArrayList();
         try {
@@ -33,6 +33,11 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
                 sqlBuff.append(" and sex=? ");
                 params.add(sex);
             }
+            // 分页
+            sqlBuff.append(" limit ?,?");
+            // limit  (pageIndex-1)*pageSize,pageSize;
+            params.add((pageIndex-1)*pageSize);
+            params.add(pageSize);
 
 
             resultSet = query(sqlBuff.toString(), params);
@@ -53,5 +58,35 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
             closeAll();
         }
         return list;
+    }
+
+    @Override
+    public int total(String name, String stuNo, int sex) {
+        int total = 0;
+        List params = new ArrayList();
+        try {
+            StringBuffer sqlBuff = new StringBuffer(" select count(*) from student where 1=1 ");
+            if (name != null && name.length() > 0) {
+                sqlBuff.append(" and stuname like ? ");
+                params.add("%" + name + "%");
+            }
+            if (stuNo != null && stuNo.length() > 0) {
+                sqlBuff.append(" and stuno=? ");
+                params.add(stuNo);
+            }
+            if (sex != -1) {
+                sqlBuff.append(" and sex=? ");
+                params.add(sex);
+            }
+            resultSet = query(sqlBuff.toString(), params);
+            while (resultSet.next()){
+                total = resultSet.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return total;
     }
 }

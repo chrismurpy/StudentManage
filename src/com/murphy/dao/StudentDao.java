@@ -12,5 +12,14 @@ public interface StudentDao {
      * 获取学生信息列表
      * @return studentList
      */
-    public List<Student> getStudents(String name,String stuNo,int sex);
+    public List<Student> getStudents(String name,String stuNo,int sex,int pageIndex,int pageSize);
+
+    /**
+     * 获得总条数(基于模糊查询)
+     * @return int
+     * @param name
+     * @param stuNo
+     * @param sex
+     */
+    public int total(String name,String stuNo,int sex);
 }

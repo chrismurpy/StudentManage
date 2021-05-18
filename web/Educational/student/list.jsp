@@ -26,41 +26,39 @@
 <body>
 	<div class="div_head" style="width: 100%;text-align:center;">
 		<span>
-                <span style="float: left;">当前位置是：教务中心-》学生管理</span>
-                <span style="float: right; margin-right: 8px; font-weight: bold;">
-                    <a style="text-decoration: none;" href="add.jsp">【新增学生】</a>&emsp;&emsp;&emsp;&emsp;
-                </span>
-            </span>
+			<span style="float: left;">当前位置是：教务中心-》学生管理</span>
+			<span style="float: right; margin-right: 8px; font-weight: bold;">
+				<a style="text-decoration: none;" href="add.jsp">【新增学生】</a>&emsp;&emsp;&emsp;&emsp;
+			</span>
+		</span>
 	</div>
 
 	<div class="cztable">
 		<div>
-				  <form action="/Educational/student/getStudentList" method="get">
-                    学生名称:
-					<input type="text" name="stuName" value="${stuname}" />
-                     学生学号:
-					<input type="text" name="stuNo" value="${stuno}" />
-					性别:
-					<select name="sex">
-							<option value="-1">--请选择--</option>
-							<option value="1" ${sex==1?"selected":""}>男</option>
-							<option value="0" ${sex==0?"selected":""}>女</option>
-						</select>
-					<input type="submit" value="查询" />
-
-                </form>
-
-		<table width="100%" border="0" cellspacing="0" cellpadding="0">
-			<tbody>
+			<form action="/Educational/student/getStudentList" method="get">
+				学生名称:
+				<input type="text" name="stuName" value="${stuname}"/>
+				学生学号:
+				<input type="text" name="stuNo" value="${stuno}"/>
+				性别:
+				<select name="sex">
+					<option value="-1">--请选择--</option>
+					<option value="1" ${sex==1?"selected":""}>男</option>
+					<option value="0" ${sex==0?"selected":""}>女</option>
+				</select>
+				<input type="submit" value="查询"/>
+			</form>
+			<table width="100%" border="0" cellspacing="0" cellpadding="0">
+				<tbody>
 				<tr style="height: 25px" align="center">
-                        <th >学号</th>
-						<th width="">姓名</th>
-						<th width="">性别</th>
-                        <th width="15%">联系电话</th>
-                        <th width="15%">专业</th>
-						<th width="15%">登记时间</th>
-						<th>操作</th>
-                    </tr>
+					<th>学号</th>
+					<th width="">姓名</th>
+					<th width="">性别</th>
+					<th width="15%">联系电话</th>
+					<th width="15%">专业</th>
+					<th width="15%">登记时间</th>
+					<th>操作</th>
+				</tr>
 
 				<c:forEach items="${stuList}" var="stu">
 					<tr id="product1">
@@ -77,14 +75,23 @@
 					</tr>
 				</c:forEach>
 
-                    <tr>
-                        <td colspan="20" style="text-align: center;">
-						<a style="text-decoration: none;" href="#">
-                            首页 上一页  ... 7 8 9 10 11 12 ... 下一页 尾页 共1234条 每页显示 10/23 </a>
-                        </td>
-                    </tr>
-                </tbody>
-            </table>
+				<tr>
+					<td colspan="20" style="text-align: center;">
+						<a style="text-decoration: none;"
+						   href="/Educational/student/getStudentList?stuname=${stuname}&stuno=${stuno}&sex=${sex}">首页</a>
+						<a style="text-decoration: none;"
+						   href="/Educational/student/getStudentList?pageIndex=${index-1<=1?1:index-1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">上一页</a>
+						<a style="text-decoration: none;"
+						   href="/Educational/student/getStudentList?pageIndex=${index+1>=totalPages?totalPages:index+1}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">下一页</a>
+						<a style="text-decoration: none;"
+						   href="/Educational/student/getStudentList?pageIndex=${totalPages}&stuname=${stuname}&stuno=${stuno}&sex=${sex}">尾页</a>
+						共${total}条
+						每页显示${size}条
+						${index}/${totalPages}
+					</td>
+				</tr>
+				</tbody>
+			</table>
 		</div>
 	</div>
 </body>
