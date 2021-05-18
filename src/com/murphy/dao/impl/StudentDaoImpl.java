@@ -3,6 +3,7 @@ package com.murphy.dao.impl;
 import com.murphy.bean.Student;
 import com.murphy.dao.DbUtils;
 import com.murphy.dao.StudentDao;
+import com.murphy.util.StudentEnum;
 
 import java.sql.ResultSet;
 import java.sql.SQLException;
@@ -108,7 +109,7 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
             params.add(student.getPolitics());
             params.add(new Date());
             // 1 - 在读 / 2 - 休学 / 3 - 退学 / 4 - 删除
-            params.add(1);
+            params.add(StudentEnum.READING.type);
             params.add(student.getIntroduction());
             params.add(student.getGid());
             i = update(sql,params);
@@ -186,7 +187,7 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
         try {
             String sql = "update student set state=? where stuid=?";
             List params = new ArrayList();
-            params.add(4);
+            params.add(StudentEnum.DELETE.type);
             params.add(sid);
             update = update(sql, params);
         } catch (Exception e) {
