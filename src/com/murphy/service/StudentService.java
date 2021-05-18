@@ -34,4 +34,11 @@ public interface StudentService {
      * @return
      */
     public int insertStu(Student student);
+
+    /**
+     * 主键查询
+     * @param sid
+     * @return
+     */
+    public Student findById(int sid);
 }

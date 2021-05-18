@@ -15,7 +15,6 @@ import java.util.List;
  */
 public class StudentDaoImpl extends DbUtils implements StudentDao {
 
-
     @Override
     public List<Student> getStudents(String name,String stuNo,int sex,int pageIndex,int pageSize) {
         List list = new ArrayList<Student>();
@@ -119,5 +118,37 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
             closeAll();
         }
         return i;
+    }
+
+    @Override
+    public Student findById(int sid) {
+        Student student = new Student();
+        try {
+            String sql = "select * from student where stuid = ?";
+            List params = new ArrayList();
+            params.add(sid);
+            resultSet = query(sql, params);
+            while (resultSet.next()){
+                student.setStuId(resultSet.getInt("stuid"));
+                student.setStuNo(resultSet.getString("stuno"));
+                student.setStuName(resultSet.getString("stuname"));
+                student.setGid(resultSet.getInt("gid"));
+                student.setSex(resultSet.getInt("sex"));
+                student.setEmail(resultSet.getString("email"));
+                student.setPhone(resultSet.getString("phone"));
+                student.setRegistered(resultSet.getString("registered"));
+                student.setRegDate(resultSet.getDate("regdate"));
+                student.setPolitics(resultSet.getString("politics"));
+                student.setIdNumber(resultSet.getString("idnumber"));
+                student.setProfession(resultSet.getString("profession"));
+                student.setIntroduction(resultSet.getString("introduction"));
+                student.setAddress(resultSet.getString("address"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return student;
     }
 }
