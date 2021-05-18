@@ -151,4 +151,32 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
         }
         return student;
     }
+
+    @Override
+    public int updateStu(Student student) {
+        int update = 0;
+        try {
+            String sql = "update student set stuname=?,stuno=?,sex=?,phone=?,email=?,registered=?" +
+                    ",profession=?,idnumber=?,politics=?,address=?,introduction=? where stuid=?";
+            List params = new ArrayList();
+            params.add(student.getStuName());
+            params.add(student.getStuNo());
+            params.add(student.getSex());
+            params.add(student.getPhone());
+            params.add(student.getEmail());
+            params.add(student.getRegistered());
+            params.add(student.getProfession());
+            params.add(student.getIdNumber());
+            params.add(student.getPolitics());
+            params.add(student.getAddress());
+            params.add(student.getIntroduction());
+            params.add(student.getStuId());
+            update = update(sql, params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return update;
+    }
 }

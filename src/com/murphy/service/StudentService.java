@@ -41,4 +41,11 @@ public interface StudentService {
      * @return
      */
     public Student findById(int sid);
+
+    /**
+     * 修改学生
+     * @param student
+     * @return
+     */
+    public int updateStu(Student student);
 }
