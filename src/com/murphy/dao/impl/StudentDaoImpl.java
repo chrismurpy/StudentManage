@@ -154,6 +154,27 @@ public class StudentDaoImpl extends DbUtils implements StudentDao {
     }
 
     @Override
+    public Student findByStuNo(String stuNo) {
+        Student student = new Student();
+        try {
+            String sql = "select * from student where stuno = ?";
+            List params = new ArrayList();
+            params.add(stuNo);
+            resultSet = query(sql,params);
+            while (resultSet.next()){
+                student.setStuId(resultSet.getInt("stuid"));
+                student.setStuNo(resultSet.getString("stuno"));
+                student.setStuName(resultSet.getString("stuname"));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return student;
+    }
+
+    @Override
     public int updateStu(Student student) {
         int update = 0;
         try {

@@ -43,6 +43,13 @@ public interface StudentService {
     public Student findById(int sid);
 
     /**
+     * 学号查询
+     * @param stuNo
+     * @return
+     */
+    public Student findByStuNo(String stuNo);
+
+    /**
      * 修改学生
      * @param student
      * @return

@@ -14,9 +14,19 @@
     <script src="../../Script/jBox/i18n/jquery.jBox-zh-CN.js" type="text/javascript"></script>
     <script src="../../Script/Common.js" type="text/javascript"></script>
     <script src="../../Script/Data.js" type="text/javascript"></script>
-    
-
 </head>
+<script type="text/javascript">
+    $(function (){
+        $("#stuNo").blur(function (){
+            // 1. 获取value值
+            var stuNo = $(this).val();
+            // 2. 发送请求
+            $.post("/Educational/student/validateServlet","stuNo="+stuNo,function (rs){
+                $("#rs").html(rs).css("color","green");
+            });
+        });
+    });
+</script>
 <body>
 
 		<div class="div_head">
@@ -32,7 +42,8 @@
                 <tr  width="120px;">
                     <td width="10%">学号：<span style="color:red">*</span>：</td>
                     <td>
-						<input type="text"  name="stuNo" value="" />
+						<input type="text" id="stuNo" name="stuNo" value="" />
+                        <span id="rs"></span>
 					</td>
                 </tr>
 

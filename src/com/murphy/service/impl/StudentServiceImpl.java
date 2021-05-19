@@ -35,6 +35,11 @@ public class StudentServiceImpl implements StudentService {
     }
 
     @Override
+    public Student findByStuNo(String stuNo) {
+        return studentDao.findByStuNo(stuNo);
+    }
+
+    @Override
     public int updateStu(Student student) {
         return studentDao.updateStu(student);
     }
