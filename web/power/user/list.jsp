@@ -101,7 +101,7 @@
               <div class=''><a href='/power/user/users?method=select&index=${pi.totalPages}' target='_self'>尾页</a></div>
               <div class=''>总共<b>${pi.total}</b>条数据</div>
               <div class=''>每页<b>${pi.pageSize}</b>条数据</div>
-              <div class=''><b>${pi.pageIndex}</b>/<b>${pi.totalPages}</b></div>
+              <div class=''> <b>${pi.pageIndex}</b> / <b>${pi.totalPages}</b> </div>
               <div class='SearchStyle'>
                   <input type='text' id='john_Page_Search' onkeydown="if(event.keyCode == 13){page_searchIndex();}"/>
               </div>

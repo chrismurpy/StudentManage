@@ -7,7 +7,7 @@
         <meta http-equiv=cache-control content=no-cache />
         <meta http-equiv=expires content=-1000 />
         
-        <title>湖南商贸经济管理专修学院</title>
+        <title>经济管理专修学院</title>
     </head>
     <frameset border=0 framespacing=0 rows="60, *" frameborder=0>
         <frame name=head src="head.jsp" frameborder=0 noresize scrolling=no>

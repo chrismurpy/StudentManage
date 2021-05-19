@@ -46,8 +46,9 @@ public class UsersServlet extends HttpServlet {
         List<Users> usersList = usersService.getUsersList(pageIndex, pageUtil.getPageSize());
         int total = usersService.total();
         pageUtil.setTotal(total);
-        pageUtil.setTotalPages(pageIndex);
+        pageUtil.setPageIndex(pageIndex);
         pageUtil.setDataList(usersList);
+
         // 3. 存值跳页面
         req.setAttribute("pi",pageUtil);
         req.getRequestDispatcher("list.jsp").forward(req,resp);
