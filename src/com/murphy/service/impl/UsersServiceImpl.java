@@ -5,6 +5,8 @@ import com.murphy.dao.UsersDao;
 import com.murphy.dao.impl.UsersDaoImpl;
 import com.murphy.service.UsersService;
 
+import java.util.List;
+
 /**
  * @author murphy
  */
@@ -15,5 +17,15 @@ public class UsersServiceImpl implements UsersService {
     @Override
     public Users login(String username, String password) {
         return usersDao.login(username, password);
+    }
+
+    @Override
+    public List<Users> getUsersList(int pageIndex, int pageSize) {
+        return usersDao.getUsersList(pageIndex, pageSize);
+    }
+
+    @Override
+    public int total() {
+        return usersDao.total();
     }
 }
