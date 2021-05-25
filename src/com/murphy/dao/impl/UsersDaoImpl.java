@@ -87,4 +87,29 @@ public class UsersDaoImpl extends DbUtils implements UsersDao {
         }
         return total;
     }
+
+    @Override
+    public int insertUser(Users users) {
+        int i = 0;
+        try {
+            String sql = "insert into users values(null,?,?,?,?,?,?,?,?,?,?)";
+            List params = new ArrayList();
+            params.add(users.getLoginName());
+            params.add(users.getPassword());
+            params.add(users.getRealName());
+            params.add(users.getSex());
+            params.add(users.getEmail());
+            params.add(users.getAddress());
+            params.add(users.getPhone());
+            params.add(users.getCardId());
+            params.add(users.getDesc());
+            params.add(users.getRoleId());
+            i = update(sql,params);
+        } catch (Exception e){
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return i;
+    }
 }

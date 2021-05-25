@@ -28,4 +28,11 @@ public interface UsersService {
      * @return
      */
     public int total();
+
+    /**
+     * 新增用户
+     * @param users
+     * @return
+     */
+    public int insertUser(Users users);
 }

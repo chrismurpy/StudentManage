@@ -29,7 +29,7 @@
 			style="float:right;margin-right: 8px;font-weight: bold">
           
             <a style="text-decoration: none;" href="javascript:alert('操作成功！');">【批量删除】</a>&nbsp;&nbsp;&nbsp;&nbsp;
-            <a style="text-decoration: none;" href="add.jsp">【新增人员】</a>&nbsp;&nbsp;&nbsp;&nbsp;
+            <a style="text-decoration: none;" href="/power/user/getRoleList">【新增人员】</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</span>
 		</span>
 	</div>

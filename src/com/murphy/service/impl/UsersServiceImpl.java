@@ -28,4 +28,9 @@ public class UsersServiceImpl implements UsersService {
     public int total() {
         return usersDao.total();
     }
+
+    @Override
+    public int insertUser(Users users) {
+        return usersDao.insertUser(users);
+    }
 }
