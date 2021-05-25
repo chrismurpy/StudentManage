@@ -116,7 +116,7 @@
 				<tr>
                     <td>专业：</td>
                     <td>
-                        <input type="text" name="profrssion" value="java" />
+                        <input type="text" name="profession" value="java" />
                     </td>                
                 </tr>
 					
