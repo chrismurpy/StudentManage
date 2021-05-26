@@ -113,4 +113,57 @@ public class UsersDaoImpl extends DbUtils implements UsersDao {
         }
         return i;
     }
+
+    @Override
+    public Users findById(int uid) {
+        Users user = new Users();
+        try {
+            String sql = "select * from users where userid = ?";
+            List params = new ArrayList();
+            params.add(uid);
+            resultSet = query(sql,params);
+            while (resultSet.next()){
+                user.setUserId(resultSet.getInt(1));
+                user.setLoginName(resultSet.getString(2));
+                user.setPassword(resultSet.getString(3));
+                user.setRealName(resultSet.getString(4));
+                user.setSex(resultSet.getInt(5));
+                user.setEmail(resultSet.getString(6));
+                user.setAddress(resultSet.getString(7));
+                user.setPhone(resultSet.getString(8));
+                user.setCardId(resultSet.getString(9));
+                user.setDesc(resultSet.getString(10));
+                user.setRoleId(resultSet.getInt(11));
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return user;
+    }
+
+    @Override
+    public int updateUser(Users user) {
+        int update = 0;
+        try {
+            String sql = "update users set loginname=?,password=?,realname=?,sex=?,email=?,address=?," +
+                    "phone=?,cardid=?,roleid=? where userid=?";
+            List params = new ArrayList();
+            params.add(user.getLoginName());
+            params.add(user.getPassword());
+            params.add(user.getRealName());
+            params.add(user.getSex());
+            params.add(user.getEmail());
+            params.add(user.getAddress());
+            params.add(user.getPhone());
+            params.add(user.getCardId());
+            params.add(user.getRoleId());
+            params.add(user.getUserId());
+            update = update(sql,params);
+        } finally {
+            closeAll();
+        }
+        return update;
+    }
 }

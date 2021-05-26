@@ -33,4 +33,18 @@ public interface UsersDao {
      * @return
      */
     public int insertUser(Users users);
+
+    /**
+     * 主键查询
+     * @param uid
+     * @return
+     */
+    public Users findById(int uid);
+
+    /**
+     * 修改用户
+     * @param user
+     * @return
+     */
+    public int updateUser(Users user);
 }

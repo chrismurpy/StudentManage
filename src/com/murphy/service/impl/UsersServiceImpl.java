@@ -65,4 +65,14 @@ public class UsersServiceImpl implements UsersService {
     public int insertUser(Users users) {
         return usersDao.insertUser(users);
     }
+
+    @Override
+    public Users findById(int uid) {
+        return usersDao.findById(uid);
+    }
+
+    @Override
+    public int updateUser(Users user) {
+        return usersDao.updateUser(user);
+    }
 }

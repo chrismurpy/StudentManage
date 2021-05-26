@@ -1,7 +1,10 @@
 package com.murphy.web;
 
+import com.murphy.bean.Role;
 import com.murphy.bean.Users;
+import com.murphy.service.RoleService;
 import com.murphy.service.UsersService;
+import com.murphy.service.impl.RoleServiceImpl;
 import com.murphy.service.impl.UsersServiceImpl;
 import com.murphy.util.PageUtil;
 
@@ -28,6 +31,10 @@ public class UsersServlet extends HttpServlet {
         String method = req.getParameter("method");
         if ("insertUser".equals(method)){
             insertUser(req, resp);
+        } else if ("findById".equals(method)){
+            findById(req,resp);
+        } else if ("update".equals(method)){
+            update(req,resp);
         } else {
             select(req,resp);
         }
@@ -96,6 +103,68 @@ public class UsersServlet extends HttpServlet {
             writer.println("<script>alert('新增成功');location.href='/power/user/users'</script>");
         } else {
             writer.println("<script>alert('新增失败');location.href='/power/user/getRoleList'</script>");
+        }
+    }
+
+    /**
+     * 主键查询
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void findById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String uid = req.getParameter("uid");
+        UsersService usersService = new UsersServiceImpl();
+        Users user = usersService.findById(Integer.parseInt(uid));
+        // 查询角色列表
+        RoleService roleService = new RoleServiceImpl();
+        List<Role> list = roleService.getLists();
+        req.setAttribute("rlist",list);
+        req.setAttribute("user",user);
+        req.getRequestDispatcher("edit.jsp").forward(req,resp);
+    }
+
+    /**
+     * 修改用户
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void update(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String uid = req.getParameter("uid");
+        String loginName = req.getParameter("loginName");
+        String password = req.getParameter("password");
+        String realName = req.getParameter("realName");
+        String sex = req.getParameter("sex");
+        String roleId = req.getParameter("roleId");
+        String email = req.getParameter("email");
+        String phone = req.getParameter("phone");
+        String address = req.getParameter("address");
+        String cardId = req.getParameter("cardId");
+
+        Users user = new Users();
+        user.setLoginName(loginName);
+        user.setPassword(password);
+        user.setRealName(realName);
+        user.setSex(Integer.parseInt(sex));
+        user.setRoleId(Integer.parseInt(roleId));
+        user.setEmail(email);
+        user.setPhone(phone);
+        user.setAddress(address);
+        user.setCardId(cardId);
+        user.setUserId(Integer.parseInt(uid));
+
+        UsersService usersService = new UsersServiceImpl();
+        int i = usersService.updateUser(user);
+        resp.setContentType("text/html;charset=utf-8");
+        PrintWriter writer = resp.getWriter();
+        if (i > 0){
+            writer.println("<script>alert('更新成功');location.href='/power/user/users'</script>");
+        } else {
+            writer.println("<script>alert('更新失败');" +
+                    "location.href='/power/user/users?method=findById&uid="+uid+"'</script>");
         }
     }
 }
