@@ -64,18 +64,18 @@
             <tr align="center">
                 <th><input type="checkbox"/></th>
                 <td>
-                    ${sta.count}
+                        ${sta.count}
                 </td>
                 <td>
-                    ${r.roleName}
+                        ${r.roleName}
                 </td>
                 <td>&nbsp;
-                    ${r.roleState==1?'启用':'禁用'}
+                        ${r.roleState==1?'启用':'禁用'}
                 </td>
 
                 <td>&nbsp;
                     <a href="javascript:alert('操作成功！');">启用</a>
-                    <a href="info.html">详情</a>
+                    <a href="info.jsp">详情</a>
                     <a href="edit.html">修改</a>
                     <a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>
                 </td>
@@ -88,11 +88,15 @@
     <div class='MainStyle'>
         <div class=''><a href='/power/role/roles?method=select' target='_self'>首页</a>
         </div>
-        <div class=''><a href='/power/role/roles?method=select&index=${pi.pageIndex-1<=1?1:pi.pageIndex-1}' target='_self'>上一页</a></div>
+        <div class=''><a href='/power/role/roles?method=select&index=${pi.pageIndex-1<=1?1:pi.pageIndex-1}'
+                         target='_self'>上一页</a></div>
         <c:forEach begin="1" end="${pi.totalPages}" var="indexa">
-            <div class=${pi.pageIndex==indexa?'NowItemStyle':''}><a href='/power/role/roles?method=select&index=${indexa}' target='_self'>${indexa}</a></div>
+            <div class=${pi.pageIndex==indexa?'NowItemStyle':''}><a
+                    href='/power/role/roles?method=select&index=${indexa}' target='_self'>${indexa}</a></div>
         </c:forEach>
-        <div class=''><a href='/power/role/roles?method=select&index=${pi.pageIndex+1>=pi.totalPages?pi.totalPages:pi.pageIndex+1}' target='_self'>下一页</a>
+        <div class=''><a
+                href='/power/role/roles?method=select&index=${pi.pageIndex+1>=pi.totalPages?pi.totalPages:pi.pageIndex+1}'
+                target='_self'>下一页</a>
         </div>
         <div class=''><a href='/power/role/roles?method=select&index=${pi.totalPages}' target='_self'>尾页</a>
         </div>
@@ -103,15 +107,17 @@
                                         onkeydown="if(event.keyCode == 13){page_searchIndex();}"/></div>
         <div class=''><input type='button' value='Go' onclick="page_searchIndex()"/></div>
     </div>
-    <script>    function page_searchIndex() {
-        var searchText = document.getElementById('john_Page_Search');
-        var searchIndex = searchText != null && searchText.value != '' ? parseInt(searchText.value) : 0;
-        if (searchIndex > 0 && searchIndex <= 3) {
-            window.location = 'StudentMaterial.aspx?page=' + searchIndex;
-        } else {
-            alert('需要跳转的页码不能超出范围！');
+    <script>
+        function page_searchIndex() {
+            var searchText = document.getElementById('john_Page_Search');
+            var searchIndex = searchText != null && searchText.value != '' ? parseInt(searchText.value) : 0;
+            if (searchIndex > 0 && searchIndex <= 3) {
+                window.location = 'StudentMaterial.aspx?page=' + searchIndex;
+            } else {
+                alert('需要跳转的页码不能超出范围！');
+            }
         }
-    }</script>
+    </script>
 </div>
 </div>
 

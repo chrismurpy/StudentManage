@@ -84,8 +84,8 @@
                     </td>
                     
                     <td>&nbsp;
-                        <a href="info.html">详情</a>						   
-                        <a href="edit.html">修改</a>
+                        <a href="info.jsp">详情</a>
+                        <a href="edit.jsp">修改</a>
 						<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>						   
                     </td>
                 </tr>
@@ -106,8 +106,8 @@
                     </td>
                     
                     <td>&nbsp;
-                        <a href="info.html">详情</a>						   
-                        <a href="edit.html">修改</a>
+                        <a href="info.jsp">详情</a>
+                        <a href="edit.jsp">修改</a>
 						<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>						   
                     </td>
                 </tr>
@@ -128,17 +128,11 @@
                     </td>
                     
                     <td>&nbsp;
-                        <a href="info.html">详情</a>						   
-                        <a href="edit.html">修改</a>
+                        <a href="info.jsp">详情</a>
+                        <a href="edit.jsp">修改</a>
 						<a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>						   
                     </td>
                 </tr>
-                
-                
-                
-               
-                
-                
             </tbody>
         </table>
         

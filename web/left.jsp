@@ -56,8 +56,6 @@
                             <td colspan=2></td>
                         </tr>
                 </table>
-
-
             </c:forEach>
 
 
