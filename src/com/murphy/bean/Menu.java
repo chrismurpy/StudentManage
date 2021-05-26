@@ -18,6 +18,16 @@ public class Menu {
     private String url;
 
     private List<Role> roleList;
+    // 保存二级目录
+    private List<Menu> secondMenuList;
+
+    public List<Menu> getSecondMenuList() {
+        return secondMenuList;
+    }
+
+    public void setSecondMenuList(List<Menu> secondMenuList) {
+        this.secondMenuList = secondMenuList;
+    }
 
     public Integer getMenuId() {
         return menuId;

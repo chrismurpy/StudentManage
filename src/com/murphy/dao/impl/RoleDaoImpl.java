@@ -32,4 +32,46 @@ public class RoleDaoImpl extends DbUtils implements RoleDao {
         }
         return list;
     }
+
+    @Override
+    public List<Role> getRoleList(int pageIndex, int pageSize) {
+        List<Role> roleList = new ArrayList<Role>();
+        try {
+            String sql = "select * from role limit ?,?";
+            List params = new ArrayList();
+            params.add((pageIndex-1)*pageSize);
+            params.add(pageSize);
+
+            resultSet = query(sql,params);
+            while (resultSet.next()){
+                Role role = new Role();
+                role.setRoleId(resultSet.getInt("roleid"));
+                role.setRoleName(resultSet.getString("rolename"));
+                role.setRoleState(resultSet.getInt("rolestate"));
+                roleList.add(role);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return roleList;
+    }
+
+    @Override
+    public int total() {
+        int total = 0;
+        try {
+            String sql = "select count(1) from role";
+            resultSet = query(sql, null);
+            while (resultSet.next()){
+                total = resultSet.getInt(1);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return total;
+    }
 }

@@ -18,4 +18,14 @@ public class RoleServiceImpl implements RoleService {
     public List<Role> getLists() {
         return roleDao.getLists();
     }
+
+    @Override
+    public List<Role> getRoleList(int pageIndex, int pageSize) {
+        return roleDao.getRoleList(pageIndex, pageSize);
+    }
+
+    @Override
+    public int total() {
+        return roleDao.total();
+    }
 }
