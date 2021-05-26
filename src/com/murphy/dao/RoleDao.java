@@ -35,4 +35,11 @@ public interface RoleDao {
      * @return
      */
     public int insert(Role role);
+
+    /**
+     * 查询角色信息
+     * @param roleId
+     * @return
+     */
+    public Role findById(int roleId);
 }

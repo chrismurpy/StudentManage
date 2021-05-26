@@ -1,5 +1,6 @@
 package com.murphy.dao.impl;
 
+import com.murphy.bean.Menu;
 import com.murphy.bean.Role;
 import com.murphy.dao.DbUtils;
 import com.murphy.dao.RoleDao;
@@ -97,5 +98,37 @@ public class RoleDaoImpl extends DbUtils implements RoleDao {
             closeAll();
         }
         return key;
+    }
+
+    @Override
+    public Role findById(int roleId) {
+        Role role = new Role();
+        List<Menu> menuList = new ArrayList<>();
+        try {
+            String sql = "select * from role r,menu m, middle mid where r.roleid=mid.roleid " +
+                    "and mid.menuid=m.menuid and r.roleid=?";
+            List params = new ArrayList();
+            params.add(roleId);
+            resultSet = query(sql,params);
+            while (resultSet.next()){
+                role.setRoleId(resultSet.getInt("roleid"));
+                role.setRoleName(resultSet.getString("rolename"));
+                role.setRoleState(resultSet.getInt("rolestate"));
+
+                Menu menu = new Menu();
+                menu.setMenuId(resultSet.getInt("menuid"));
+                menu.setMenuName(resultSet.getString("menuname"));
+                menu.setUrl(resultSet.getString("url"));
+                menu.setState(resultSet.getInt("state"));
+                menu.setUpMenuId(resultSet.getInt("upmenuid"));
+                menuList.add(menu);
+            }
+            role.setMenuList(menuList);
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return role;
     }
 }

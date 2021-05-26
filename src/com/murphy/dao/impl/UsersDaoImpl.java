@@ -32,6 +32,7 @@ public class UsersDaoImpl extends DbUtils implements UsersDao {
                 users.setLoginName(username);
                 users.setRealName(resultSet.getString(4));
                 users.setUserId(resultSet.getInt(1));
+                users.setRoleId(resultSet.getInt("roleId"));
             }
         } catch (SQLException throwables) {
             throwables.printStackTrace();
