@@ -17,7 +17,7 @@ public class DbUtils {
      * 1.定义变量
      */
     private Connection connection;
-    private PreparedStatement pps;
+    protected PreparedStatement pps;
     protected ResultSet resultSet;
     // 存储收影响的行数
     private int count;
@@ -58,7 +58,8 @@ public class DbUtils {
     //4.得到预状态通道
     protected  PreparedStatement getPps(String sql){
         try {
-            pps= getConnection().prepareStatement(sql);
+            // 获取新增数据的ID值
+            pps= getConnection().prepareStatement(sql,Statement.RETURN_GENERATED_KEYS);
         } catch (SQLException throwables) {
             throwables.printStackTrace();
         }

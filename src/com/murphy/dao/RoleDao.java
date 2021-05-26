@@ -28,4 +28,11 @@ public interface RoleDao {
      * @return
      */
     public int total();
+
+    /**
+     * 新增角色
+     * @param role
+     * @return
+     */
+    public int insert(Role role);
 }

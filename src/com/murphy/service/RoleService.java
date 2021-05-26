@@ -28,4 +28,13 @@ public interface RoleService {
      * @return
      */
     public int total();
+
+    /**
+     * 新增角色
+     * @param roleName
+     * @param state
+     * @param ids
+     * @return
+     */
+    public int insertRole(String roleName, String state, String[] ids);
 }

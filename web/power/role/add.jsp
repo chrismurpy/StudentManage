@@ -31,12 +31,12 @@
 </div>
 </div>
 <div class="cztable">
-    <form action="list.html" method="post">
+    <form action="/power/role/roles?method=insert" method="post">
         <table border="1" width="100%" class="table_a">
             <tr width="120px;">
                 <td width="120px">角色名：<span style="color:red">*</span>：</td>
                 <td>
-                    <input type="text" name="f_goods_image" value="管理员"/>
+                    <input type="text" name="roleName" value="管理员"/>
                 </td>
             </tr>
 
@@ -45,11 +45,11 @@
                 <td>
                     <c:forEach items="${menuList}" var="m">
                         <ul>
-                            <li><input type="checkbox" name="menu"/>${m.menuName}
+                            <li><input type="checkbox" value="${m.menuId}" name="menuId"/>&nbsp;${m.menuName}
                                 <ul>
                                     <c:forEach items="${m.secondMenuList}" var="m2">
                                         <li>&nbsp;&nbsp;&nbsp;&nbsp;
-                                            <input type="checkbox" name="menu"/>&nbsp;${m2.menuName}
+                                            <input type="checkbox" value="${m2.menuId}" name="menuId"/>&nbsp;${m2.menuName}
                                         </li>
                                     </c:forEach>
                                 </ul>
@@ -63,7 +63,8 @@
             <tr>
                 <td>启用状态<span style="color:red">*</span>：</td>
                 <td>
-                    <input type="radio" name="state" checked value="1"/>启用 <input type="radio" name="state" value="0"/>禁用
+                    <input type="radio" name="state" checked value="1"/>启用
+                    <input type="radio" name="state" value="0"/>禁用
                 </td>
             </tr>
 

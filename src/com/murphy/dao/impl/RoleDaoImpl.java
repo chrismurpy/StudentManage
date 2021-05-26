@@ -4,6 +4,7 @@ import com.murphy.bean.Role;
 import com.murphy.dao.DbUtils;
 import com.murphy.dao.RoleDao;
 
+import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.util.ArrayList;
 import java.util.List;
@@ -73,5 +74,28 @@ public class RoleDaoImpl extends DbUtils implements RoleDao {
             closeAll();
         }
         return total;
+    }
+
+    @Override
+    public int insert(Role role) {
+        // 新增数据的ID
+        int key = 0;
+        try {
+            String sql = "insert into role values(null,?,?)";
+            List params = new ArrayList();
+            params.add(role.getRoleName());
+            params.add(role.getRoleState());
+            // 保存受影响的行数
+            int update = update(sql,params);
+            ResultSet generatedKeys = pps.getGeneratedKeys();
+            if (generatedKeys.next()){
+                key = generatedKeys.getInt(1);
+            }
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return key;
     }
 }

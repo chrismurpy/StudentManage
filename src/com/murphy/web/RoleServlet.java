@@ -37,6 +37,8 @@ public class RoleServlet extends HttpServlet {
             select(req, resp);
         } else if ("selectMenus".equals(method)){
             selectMeuns(req,resp);
+        } else if ("insert".equals(method)){
+            insert(req,resp);
         }
     }
 
@@ -78,7 +80,26 @@ public class RoleServlet extends HttpServlet {
         // 2. 调取Service方法
         List<Menu> menuList = menuService.getMenuList();
         req.setAttribute("menuList",menuList);
+        // 3. 转发
         req.getRequestDispatcher("add.jsp").forward(req,resp);
-        // 3.
+    }
+
+    /**
+     * 新增角色
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void insert(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String roleName = req.getParameter("roleName");
+        String state = req.getParameter("state");
+        String[] menuIds = req.getParameterValues("menuId");
+        int i = roleService.insertRole(roleName, state, menuIds);
+        if (i > 0){
+            resp.sendRedirect("/power/role/roles?method=select");
+        } else {
+            resp.sendRedirect("/power/role/roles?method=selectMenus");
+        }
     }
 }
