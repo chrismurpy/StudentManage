@@ -78,7 +78,7 @@
                             ${r.roleState==1?'禁用':'启用'}
                     </a>
                     <a href="/power/role/roles?method=findById&roleid=${r.roleId}">详情</a>
-                    <a href="/power/role/roles?method=update">修改</a>
+                    <a href="/power/role/roles?method=updateInfo&roleid=${r.roleId}">修改</a>
                     <a href="/power/role/roles?method=delete&roleid=${r.roleId}" class="tablelink"> 删除</a>
                 </td>
             </tr>

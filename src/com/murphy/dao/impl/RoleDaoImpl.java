@@ -164,29 +164,4 @@ public class RoleDaoImpl extends DbUtils implements RoleDao {
         }
         return update;
     }
-
-//    @Override
-//    public int update(Role role) {
-//        int update = 0;
-//        int delete = 0;
-//        try {
-//            String sql = "update role set rolename=?,rolestate=? where roleid=?";
-//            List params = new ArrayList();
-//            params.add(role.getRoleName());
-//            params.add(role.getRoleState());
-//            params.add(role.getRoleId());
-//            update = update(sql,params);
-//            if (update > 0){
-//                String sql1 = "delete m from middle m,role r where r.roleid = m.roleid and r.roleid=?;";
-//                List params1 = new ArrayList();
-//                params1.add(role.getRoleId());
-//                delete = update(sql1,params1);
-//            }
-//        } catch (Exception e){
-//            e.printStackTrace();
-//        } finally {
-//            closeAll();
-//        }
-//        return delete;
-//    }
 }

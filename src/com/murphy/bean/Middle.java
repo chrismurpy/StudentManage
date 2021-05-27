@@ -4,9 +4,18 @@ package com.murphy.bean;
  * @author murphy
  */
 public class Middle {
-    Integer middleId;
-    Integer roleId;
-    Integer menuId;
+    private Integer middleId;
+    private Integer roleId;
+    private Integer menuId;
+    private String roleName;
+
+    public String getRoleName() {
+        return roleName;
+    }
+
+    public void setRoleName(String roleName) {
+        this.roleName = roleName;
+    }
 
     public Integer getMiddleId() {
         return middleId;

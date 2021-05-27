@@ -23,6 +23,7 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 import java.io.IOException;
 import java.io.PrintWriter;
+import java.util.ArrayList;
 import java.util.List;
 
 /**
@@ -57,6 +58,12 @@ public class RoleServlet extends HttpServlet {
                 break;
             case "findById":
                 findById(req,resp);
+                break;
+            case "updateInfo":
+                updateInfo(req,resp);
+                break;
+            case "edit":
+                edit(req,resp);
                 break;
         }
     }
@@ -122,6 +129,13 @@ public class RoleServlet extends HttpServlet {
         }
     }
 
+    /**
+     * 删除角色
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String roleid = req.getParameter("roleid");
         int flag1 = roleService.deleteRole(Integer.parseInt(roleid));
@@ -135,6 +149,13 @@ public class RoleServlet extends HttpServlet {
         }
     }
 
+    /**
+     * 角色状态更改
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void startup(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String roleid = req.getParameter("roleid");
         String rolestate = req.getParameter("rolestate");
@@ -159,6 +180,13 @@ public class RoleServlet extends HttpServlet {
         }
     }
 
+    /**
+     * 查找角色
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
     protected void findById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String roleid = req.getParameter("roleid");
         Role role = roleService.findById(Integer.parseInt(roleid));
@@ -180,5 +208,66 @@ public class RoleServlet extends HttpServlet {
         }
         req.setAttribute("MENU",String.valueOf(sb));
         req.getRequestDispatcher("info.jsp").forward(req,resp);
+    }
+
+    /**
+     * 修改页面
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void updateInfo(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String roleid = req.getParameter("roleid");
+        Role role = roleService.findById(Integer.parseInt(roleid));
+        if (role != null){
+            req.setAttribute("role",role);
+        }
+        // 权限显示
+        List<Menu> menuList = menuService.getMenuList();
+        req.setAttribute("menus",menuList);
+
+        // 角色权限
+        List<Middle> middleList = middleService.findMiddle(Integer.parseInt(roleid));
+        StringBuffer sb = new StringBuffer();
+        for (int i=0; i<middleList.size(); i++){
+            if (middleList.get(i)==null){
+                continue;
+            }
+            sb.append(middleList.get(i).getMenuId());
+        }
+        req.setAttribute("MENU",String.valueOf(sb));
+        req.getRequestDispatcher("edit.jsp").forward(req,resp);
+    }
+
+    /**
+     * 修改操作
+     * @param req
+     * @param resp
+     * @throws ServletException
+     * @throws IOException
+     */
+    protected void edit(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String roleid = req.getParameter("roleid");
+
+        int flag1 = roleService.deleteRole(Integer.parseInt(roleid));
+        int flag2 = middleService.deleteMiddle(Integer.parseInt(roleid));
+        resp.setContentType("text/html;charset=utf-8");
+        PrintWriter writer = resp.getWriter();
+        if (flag1 < 0 || flag2 < 0){
+            writer.println("<script>alert('修改异常！');location.href='/power/role/roles?method=updateInfo'</script>");
+            return;
+        }
+
+        String roleName = req.getParameter("roleName");
+        String state = req.getParameter("state");
+        String[] menuIds = req.getParameterValues("menuId");
+
+        int i = roleService.insertRole(roleName,state,menuIds);
+        if (i > 0){
+            writer.println("<script>alert('修改成功！');location.href='/power/role/roles?method=select'</script>");
+        } else {
+            writer.println("<script>alert('修改异常！');location.href='/power/role/roles?method=updateInfo'</script>");
+        }
     }
 }

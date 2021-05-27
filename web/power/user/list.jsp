@@ -30,8 +30,7 @@
 		<span>
             <span style="float:left">当前位置是：权限管理-》人员管理</span>
             <span style="float:right;margin-right: 8px;font-weight: bold">
-          
-            <a style="text-decoration: none;" href="javascript:alert('操作成功！');">【批量删除】</a>&nbsp;&nbsp;&nbsp;&nbsp;
+
             <a style="text-decoration: none;" href="/power/user/getRoleList">【新增人员】</a>&nbsp;&nbsp;&nbsp;&nbsp;
 		</span>
 		</span>

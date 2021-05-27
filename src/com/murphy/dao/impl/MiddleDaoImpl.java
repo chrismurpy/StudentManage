@@ -1,6 +1,7 @@
 package com.murphy.dao.impl;
 
 import com.murphy.bean.Middle;
+import com.murphy.bean.Role;
 import com.murphy.dao.DbUtils;
 import com.murphy.dao.MiddleDao;
 
@@ -51,7 +52,8 @@ public class MiddleDaoImpl extends DbUtils implements MiddleDao {
     public List<Middle> findMiddle(int rid) {
         List<Middle> middleList = new ArrayList<>();
         try {
-            String sql = "select * from middle where roleid = ?";
+            String sql = "select m.middleid, m.roleid, m.menuid, r.rolename from middle m," +
+                    "role r where  r.roleid=m.roleid and r.roleid = ?";
             List params = new ArrayList();
             params.add(rid);
             resultSet = query(sql,params);
@@ -60,6 +62,7 @@ public class MiddleDaoImpl extends DbUtils implements MiddleDao {
                 middle.setMiddleId(resultSet.getInt(1));
                 middle.setRoleId(resultSet.getInt(2));
                 middle.setMenuId(resultSet.getInt(3));
+                middle.setRoleName(resultSet.getString(4));
                 middleList.add(middle);
             }
         } catch (SQLException throwables) {

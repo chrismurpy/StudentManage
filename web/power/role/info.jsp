@@ -73,7 +73,7 @@
                 <td>启用状态<span style="color:red">*</span>：</td>
                 <td>
                     <input type="radio" name="state" ${role.roleState==1?'checked':''} value="1" onclick="return false;"/>启用
-                    <input type="radio" name="state" ${role.roleState==1?'checked':''} value="0" onclick="return false;"/>禁用
+                    <input type="radio" name="state" ${role.roleState==0?'checked':''} value="0" onclick="return false;"/>禁用
                 </td>
             </tr>
 
