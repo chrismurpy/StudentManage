@@ -57,6 +57,7 @@ public class RoleServlet extends HttpServlet {
                 break;
             case "findById":
                 findById(req,resp);
+                break;
         }
     }
 
