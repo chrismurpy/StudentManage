@@ -50,4 +50,12 @@ public interface RoleService {
      * @return
      */
     public int deleteRole(int rid);
+
+    /**
+     * 角色状态(启用/禁用)
+     * @param roleState
+     * @param rid
+     * @return
+     */
+    public int state(int roleState, int rid);
 }

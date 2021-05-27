@@ -74,7 +74,9 @@
                 </td>
 
                 <td>&nbsp;
-                    <a href="javascript:alert('操作成功！');">启用</a>
+                    <a href="/power/role/roles?method=startup&rolestate=${r.roleState}&roleid=${r.roleId}">
+                            ${r.roleState==1?'禁用':'启用'}
+                    </a>
                     <a href="info.jsp">详情</a>
                     <a href="/power/role/roles?method=update">修改</a>
                     <a href="/power/role/roles?method=delete&roleid=${r.roleId}" class="tablelink"> 删除</a>

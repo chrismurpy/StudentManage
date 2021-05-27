@@ -51,6 +51,9 @@ public class RoleServlet extends HttpServlet {
             case "delete":
                 delete(req,resp);
                 break;
+            case "startup":
+                startup(req,resp);
+                break;
         }
     }
 
@@ -122,9 +125,33 @@ public class RoleServlet extends HttpServlet {
         resp.setContentType("text/html;charset=utf-8");
         PrintWriter writer = resp.getWriter();
         if (flag1 > 0 && flag2 > 0){
-            writer.println("<script>alert('删除成功');location.href='/power/role/roles?method=select'</script>");
+            writer.println("<script>alert('删除成功！');location.href='/power/role/roles?method=select'</script>");
         } else {
-            writer.println("<script>alert('删除失败');location.href='javascript:history.back()'</script>");
+            writer.println("<script>alert('删除失败！');location.href='javascript:history.back()'</script>");
+        }
+    }
+
+    protected void startup(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String roleid = req.getParameter("roleid");
+        String rolestate = req.getParameter("rolestate");
+        resp.setContentType("text/html;charset=utf-8");
+        PrintWriter writer = resp.getWriter();
+        if (rolestate.equals("0")){
+            rolestate = "1";
+            int count = roleService.state(Integer.parseInt(rolestate), Integer.parseInt(roleid));
+            if (count > 0){
+                writer.println("<script>alert('启用成功！');location.href='/power/role/roles?method=select'</script>");
+            } else {
+                writer.println("<script>alert('启用异常！');location.href='/power/role/roles?method=select'</script>");
+            }
+        } else {
+            rolestate = "0";
+            int count = roleService.state(Integer.parseInt(rolestate), Integer.parseInt(roleid));
+            if (count > 0){
+                writer.println("<script>alert('禁用成功！');location.href='/power/role/roles?method=select'</script>");
+            } else {
+                writer.println("<script>alert('禁用异常！');location.href='/power/role/roles?method=select'</script>");
+            }
         }
     }
 }

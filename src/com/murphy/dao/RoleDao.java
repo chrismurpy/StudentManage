@@ -49,4 +49,12 @@ public interface RoleDao {
      * @return
      */
     public int delete(int rid);
+
+    /**
+     * 角色状态(启用/禁用)
+     * @param roleState
+     * @param rid
+     * @return
+     */
+    public int state(int roleState, int rid);
 }

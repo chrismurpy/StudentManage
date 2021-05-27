@@ -148,6 +148,23 @@ public class RoleDaoImpl extends DbUtils implements RoleDao {
         return delete;
     }
 
+    @Override
+    public int state(int roleState, int rid) {
+        int update = 0;
+        try {
+            String sql = "update role set rolestate = ? where roleid = ?";
+            List params = new ArrayList();
+            params.add(roleState);
+            params.add(rid);
+            update = update(sql,params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return update;
+    }
+
 //    @Override
 //    public int update(Role role) {
 //        int update = 0;

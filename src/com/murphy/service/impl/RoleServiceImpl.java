@@ -61,4 +61,9 @@ public class RoleServiceImpl implements RoleService {
     public int deleteRole(int rid) {
         return roleDao.delete(rid);
     }
+
+    @Override
+    public int state(int roleState, int rid) {
+        return roleDao.state(roleState,rid);
+    }
 }
