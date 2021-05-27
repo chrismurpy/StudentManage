@@ -76,8 +76,8 @@
                 <td>&nbsp;
                     <a href="javascript:alert('操作成功！');">启用</a>
                     <a href="info.jsp">详情</a>
-                    <a href="edit.html">修改</a>
-                    <a href="javascript:void(0)" onclick="del();return false" class="tablelink"> 删除</a>
+                    <a href="/power/role/roles?method=update">修改</a>
+                    <a href="/power/role/roles?method=delete&roleid=${r.roleId}" class="tablelink"> 删除</a>
                 </td>
             </tr>
         </c:forEach>
@@ -107,17 +107,6 @@
                                         onkeydown="if(event.keyCode == 13){page_searchIndex();}"/></div>
         <div class=''><input type='button' value='Go' onclick="page_searchIndex()"/></div>
     </div>
-    <script>
-        function page_searchIndex() {
-            var searchText = document.getElementById('john_Page_Search');
-            var searchIndex = searchText != null && searchText.value != '' ? parseInt(searchText.value) : 0;
-            if (searchIndex > 0 && searchIndex <= 3) {
-                window.location = 'StudentMaterial.aspx?page=' + searchIndex;
-            } else {
-                alert('需要跳转的页码不能超出范围！');
-            }
-        }
-    </script>
 </div>
 </div>
 

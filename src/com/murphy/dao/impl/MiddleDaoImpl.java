@@ -4,6 +4,8 @@ import com.murphy.dao.DbUtils;
 import com.murphy.dao.MiddleDao;
 
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.List;
 
 public class MiddleDaoImpl extends DbUtils implements MiddleDao {
     @Override
@@ -26,5 +28,21 @@ public class MiddleDaoImpl extends DbUtils implements MiddleDao {
             closeAll();
         }
         return k;
+    }
+
+    @Override
+    public int deleteMiddle(int rid) {
+        int delete = 0;
+        try {
+            String sql = "delete from middle where roleid = ?";
+            List params = new ArrayList();
+            params.add(rid);
+            delete = update(sql,params);
+        } catch (Exception e) {
+            e.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return delete;
     }
 }

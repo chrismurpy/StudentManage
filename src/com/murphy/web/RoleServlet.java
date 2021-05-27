@@ -3,10 +3,14 @@ package com.murphy.web;
 import com.murphy.bean.Menu;
 import com.murphy.bean.Role;
 import com.murphy.bean.Users;
+import com.murphy.dao.MiddleDao;
+import com.murphy.dao.impl.MiddleDaoImpl;
 import com.murphy.service.MenuService;
+import com.murphy.service.MiddleService;
 import com.murphy.service.RoleService;
 import com.murphy.service.UsersService;
 import com.murphy.service.impl.MenuServiceImpl;
+import com.murphy.service.impl.MiddleServiceImpl;
 import com.murphy.service.impl.RoleServiceImpl;
 import com.murphy.service.impl.UsersServiceImpl;
 import com.murphy.util.PageUtil;
@@ -29,16 +33,24 @@ public class RoleServlet extends HttpServlet {
 
     private RoleService roleService = new RoleServiceImpl();
     private MenuService menuService = new MenuServiceImpl();
+    private MiddleService middleService = new MiddleServiceImpl();
 
     @Override
     protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
         String method = req.getParameter("method");
-        if ("select".equals(method)) {
-            select(req, resp);
-        } else if ("selectMenus".equals(method)){
-            selectMeuns(req,resp);
-        } else if ("insert".equals(method)){
-            insert(req,resp);
+        switch (method){
+            case "select":
+                select(req, resp);
+                break;
+            case "selectMenus":
+                selectMeuns(req, resp);
+                break;
+            case "insert":
+                insert(req, resp);
+                break;
+            case "delete":
+                delete(req,resp);
+                break;
         }
     }
 
@@ -100,6 +112,19 @@ public class RoleServlet extends HttpServlet {
             resp.sendRedirect("/power/role/roles?method=select");
         } else {
             resp.sendRedirect("/power/role/roles?method=selectMenus");
+        }
+    }
+
+    protected void delete(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String roleid = req.getParameter("roleid");
+        int flag1 = roleService.deleteRole(Integer.parseInt(roleid));
+        int flag2 = middleService.deleteMiddle(Integer.parseInt(roleid));
+        resp.setContentType("text/html;charset=utf-8");
+        PrintWriter writer = resp.getWriter();
+        if (flag1 > 0 && flag2 > 0){
+            writer.println("<script>alert('删除成功');location.href='/power/role/roles?method=select'</script>");
+        } else {
+            writer.println("<script>alert('删除失败');location.href='javascript:history.back()'</script>");
         }
     }
 }

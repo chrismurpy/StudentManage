@@ -42,4 +42,11 @@ public interface RoleDao {
      * @return
      */
     public Role findById(int roleId);
+
+    /**
+     * 删除角色信息
+     * @param rid
+     * @return
+     */
+    public int delete(int rid);
 }

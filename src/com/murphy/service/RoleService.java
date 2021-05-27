@@ -8,7 +8,6 @@ import java.util.List;
  * @author murphy
  */
 public interface RoleService {
-
     /**
      * 查询角色列表
      * @return list
@@ -37,4 +36,18 @@ public interface RoleService {
      * @return
      */
     public int insertRole(String roleName, String state, String[] ids);
+
+    /**
+     * 查询角色信息
+     * @param rid
+     * @return
+     */
+    public Role findById(int rid);
+
+    /**
+     * 删除角色信息
+     * @param rid
+     * @return
+     */
+    public int deleteRole(int rid);
 }
