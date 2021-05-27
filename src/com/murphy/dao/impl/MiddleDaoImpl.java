@@ -1,5 +1,6 @@
 package com.murphy.dao.impl;
 
+import com.murphy.bean.Middle;
 import com.murphy.dao.DbUtils;
 import com.murphy.dao.MiddleDao;
 
@@ -44,5 +45,28 @@ public class MiddleDaoImpl extends DbUtils implements MiddleDao {
             closeAll();
         }
         return delete;
+    }
+
+    @Override
+    public List<Middle> findMiddle(int rid) {
+        List<Middle> middleList = new ArrayList<>();
+        try {
+            String sql = "select * from middle where roleid = ?";
+            List params = new ArrayList();
+            params.add(rid);
+            resultSet = query(sql,params);
+            while (resultSet.next()){
+                Middle middle = new Middle();
+                middle.setMiddleId(resultSet.getInt(1));
+                middle.setRoleId(resultSet.getInt(2));
+                middle.setMenuId(resultSet.getInt(3));
+                middleList.add(middle);
+            }
+        } catch (SQLException throwables) {
+            throwables.printStackTrace();
+        } finally {
+            closeAll();
+        }
+        return middleList;
     }
 }

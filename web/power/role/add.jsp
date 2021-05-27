@@ -56,7 +56,6 @@
                             </li>
                         </ul>
                     </c:forEach>
-
                 </td>
             </tr>
 

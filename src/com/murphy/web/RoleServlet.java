@@ -1,6 +1,7 @@
 package com.murphy.web;
 
 import com.murphy.bean.Menu;
+import com.murphy.bean.Middle;
 import com.murphy.bean.Role;
 import com.murphy.bean.Users;
 import com.murphy.dao.MiddleDao;
@@ -54,6 +55,8 @@ public class RoleServlet extends HttpServlet {
             case "startup":
                 startup(req,resp);
                 break;
+            case "findById":
+                findById(req,resp);
         }
     }
 
@@ -153,5 +156,28 @@ public class RoleServlet extends HttpServlet {
                 writer.println("<script>alert('禁用异常！');location.href='/power/role/roles?method=select'</script>");
             }
         }
+    }
+
+    protected void findById(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+        String roleid = req.getParameter("roleid");
+        Role role = roleService.findById(Integer.parseInt(roleid));
+        if (role != null){
+            req.setAttribute("role",role);
+        }
+        // 权限显示
+        List<Menu> menus = menuService.getMenuList();
+        req.setAttribute("menus",menus);
+
+        // 角色权限
+        List<Middle> rMenu = middleService.findMiddle(Integer.parseInt(roleid));
+        StringBuffer sb = new StringBuffer();
+        for (int i=0; i<rMenu.size(); i++){
+            if (rMenu.get(i)==null){
+                continue;
+            }
+            sb.append(rMenu.get(i).getMenuId());
+        }
+        req.setAttribute("MENU",String.valueOf(sb));
+        req.getRequestDispatcher("info.jsp").forward(req,resp);
     }
 }
